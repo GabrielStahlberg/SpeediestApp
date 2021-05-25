@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:speediest_app/screens/home/home_screen.dart';
+import 'package:speediest_app/screens/settings/settings_screen.dart';
 
 class RouteGenerator {
+  static const String SETTINGS_ROUTE = "/settings_screen";
+
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final args = settings.arguments;
 
@@ -9,6 +12,10 @@ class RouteGenerator {
       case "/":
         return MaterialPageRoute(
             builder: (_) => HomeScreen()
+        );
+      case SETTINGS_ROUTE:
+        return MaterialPageRoute(
+            builder: (_) => SettingsScreen()
         );
       default:
         return _routeError();

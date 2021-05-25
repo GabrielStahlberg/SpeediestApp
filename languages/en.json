@@ -1,4 +1,10 @@
 {
+  "cancel" : "Cancel",
+  "confirm" : "Confirm",
   "connection" : "Connection",
-  "history" : "History"
+  "history" : "History",
+  "idioms" : "Idioms",
+  "language" : "Language",
+  "select" : "Select",
+  "settings" : "Settings"
 }

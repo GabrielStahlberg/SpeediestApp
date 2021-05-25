@@ -3,10 +3,72 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:speediest_app/localization/app_localization.dart';
 import 'package:speediest_app/main.dart';
 import 'package:speediest_app/model/language.dart';
+import 'package:speediest_app/size_config.dart';
+import 'package:speediest_app/widgets/alert_dialog_popup.dart';
+import 'package:speediest_app/widgets/dropdown.dart';
 
 import 'contants.dart';
 
 class UtilsImpl {
+
+  static showLanguageDialog(BuildContext context) async {
+    List<DropdownMenuItem<String>> _languagesItems = getDropDownMenuItems(Language.flagNameList());
+    Locale _locale = await getLocale();
+    String _currentLang = _locale.languageCode == "pt"
+        ? _languagesItems[0].value
+        : _languagesItems[1].value;
+
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialogPopup(
+            title: UtilsImpl.getTranslated(context, "idioms"),
+            negativeButton: UtilsImpl.getTranslated(context, "cancel"),
+            positiveButton: UtilsImpl.getTranslated(context, "confirm"),
+            onPress: () {
+              _currentLang.split("  ")[1] == "English"
+                  ? _changeLanguage(context, Language(2, "English", "flag2", "en"))
+                  : _changeLanguage(context, Language(1, "Português", "flag1", "pt"));
+              Navigator.pop(context);
+            },
+            content: StatefulBuilder(builder: (context, setState) {
+              double defaultSize = SizeConfig.defaultSize;
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Text(
+                    UtilsImpl.getTranslated(context, "select") + ":",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: defaultSize * 1.7),
+                  ),
+                  DropDown(
+                    value: _currentLang,
+                    items: _languagesItems,
+                    onChanged: (value) {
+                      setState(() {
+                        _currentLang = value;
+                      });
+                    },
+                    textSize: defaultSize * 1.6,
+                    isExpanded: true,
+                  )
+                ],
+              );
+            }),
+          );
+        });
+  }
+
+  static List<DropdownMenuItem<String>> getDropDownMenuItems(
+      List<String> list) {
+    List<DropdownMenuItem<String>> items = new List();
+    for (String item in list) {
+      items.add(new DropdownMenuItem(value: item, child: new Text(item)));
+    }
+    return items;
+  }
 
   static Future<Locale> getLocale() async {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
