@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:speediest_app/screens/connection/connection_screen.dart';
 import 'package:speediest_app/screens/history/history_screen.dart';
 import 'package:speediest_app/screens/main/main_screen.dart';
@@ -40,7 +41,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         ),
         BottomNavigationBarItem(
             label: UtilsImpl.getTranslated(context, "connection"),
-            icon: Icon(Icons.home, color: currentIndex == 2 ? kSecondColor : kPrimaryColor)
+            icon: Icon(MdiIcons.signalVariant, color: currentIndex == 2 ? kSecondColor : kPrimaryColor)
         )
       ],
     );

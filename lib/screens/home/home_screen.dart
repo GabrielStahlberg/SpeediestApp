@@ -13,7 +13,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  var store = GetIt.I.get<HomeStore>();
+  var storeHome = GetIt.I.get<HomeStore>();
 
   @override
   Widget build(BuildContext context) {
@@ -26,15 +26,8 @@ class _HomeScreenState extends State<HomeScreen> {
             SettingsAction()
           ],
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: FloatingActionButton(
-          onPressed: (){
-          },
-          child: Icon(Icons.network_check),
-          elevation: 2.0,
-        ),
         body: Background(
-          child: store.screen,
+          child: storeHome.screen,
         ),
         bottomNavigationBar: BottomNavBar(),
       );
@@ -44,6 +37,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void dispose() {
     super.dispose();
-    store.changeScreen(MainScreen());
+    storeHome.changeScreen(MainScreen());
   }
 }
