@@ -1,7 +1,9 @@
+import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:speediest_app/localization/app_localization.dart';
 import 'package:speediest_app/main.dart';
+import 'package:speediest_app/model/connection_stats.dart';
 import 'package:speediest_app/model/language.dart';
 import 'package:speediest_app/size_config.dart';
 import 'package:speediest_app/widgets/alert_dialog_popup.dart';
@@ -10,6 +12,19 @@ import 'package:speediest_app/widgets/dropdown.dart';
 import 'contants.dart';
 
 class UtilsImpl {
+
+  static getLineChartConnectionsSeries(var data) {
+    return [
+      charts.Series<ConnectionStats, int>(
+          id: "Connections",
+          domainFn: (ConnectionStats stats, _) => stats.id,
+          measureFn: (ConnectionStats stats, _) => stats.average,
+          colorFn: (ConnectionStats stats, _) =>
+              charts.ColorUtil.fromDartColor(stats.color),
+          data: data
+      )
+    ];
+  }
 
   static showLanguageDialog(BuildContext context) async {
     List<DropdownMenuItem<String>> _languagesItems = getDropDownMenuItems(Language.flagNameList());
