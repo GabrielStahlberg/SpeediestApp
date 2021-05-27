@@ -27,12 +27,12 @@ class _HistoryScreenState extends State<HistoryScreen> {
     List<ConnectionHistory> historyList = _getHistory();
 
     return ListView.builder(
-        padding: EdgeInsets.only(top: defaultSize, bottom: defaultSize * 1.2),
-        itemCount: historyList.length,
-        itemBuilder: (BuildContext context, int index) {
-          ConnectionHistory history = historyList[index];
-          return HistoryItemCard(history: history, historyList: historyList);
-        }
+      padding: EdgeInsets.only(top: defaultSize, bottom: defaultSize * 1.2),
+      itemCount: historyList.length,
+      itemBuilder: (BuildContext context, int index) {
+        ConnectionHistory history = historyList[index];
+        return HistoryItemCard(history: history, historyList: historyList);
+      }
     );
   }
 }

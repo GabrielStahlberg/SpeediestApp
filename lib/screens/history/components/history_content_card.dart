@@ -39,15 +39,46 @@ class HistoryContentCard extends StatelessWidget {
                     ),
                     SizedBox(height: defaultSize),
                     Text(
-                      history.average,
+                      history.location,
                       style: TextStyle(
                           fontSize: defaultSize * 2,
                           fontWeight: FontWeight.bold,
                           color: kSecondColor,
                       ),
                     ),
+                    SizedBox(height: defaultSize),
+                    Text(
+                      history.duration,
+                      style: TextStyle(
+                        fontSize: defaultSize * 2,
+                        fontWeight: FontWeight.bold,
+                        color: kSecondColor,
+                      ),
+                    ),
                   ],
                 ),
+              ),
+              Spacer(),
+              Column(
+                children: [
+                  Text(
+                    history.date,
+                    style: TextStyle(
+                      fontSize: defaultSize,
+                      fontWeight: FontWeight.bold,
+                      color: kSecondColor,
+                    ),
+                  ),
+                  SizedBox(height: defaultSize * 5),
+                  Text(
+                    history.average,
+                    style: TextStyle(
+                      fontSize: defaultSize,
+                      fontWeight: FontWeight.bold,
+                      color: kSecondColor,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

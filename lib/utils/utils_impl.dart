@@ -26,6 +26,69 @@ class UtilsImpl {
     ];
   }
 
+  static showPeriodicTestDialog(BuildContext context) {
+    final TextEditingController _controller = TextEditingController();
+    _controller.text = "30";
+
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialogPopup(
+            title: "Teste periódico",
+            negativeButton: UtilsImpl.getTranslated(context, "cancel"),
+            positiveButton: UtilsImpl.getTranslated(context, "confirm"),
+            onPress: () {
+              Navigator.pop(context);
+            },
+            content: StatefulBuilder(builder: (context, setState) {
+              double defaultSize = SizeConfig.defaultSize;
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    "Informe em minutos:",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: defaultSize * 1.7),
+                  ),
+                  SizedBox(height: defaultSize),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      IconButton(icon: Icon(Icons.remove_circle_outline, color: kSecondColor), iconSize: defaultSize * 2.5,
+                        onPressed: (){
+                          int minutes = int.parse(_controller.text);
+                          minutes--;
+                          _controller.text = minutes.toString();
+                        },
+                      ),
+                      SizedBox(
+                        width: defaultSize * 5,
+                        child: TextField(
+                          controller: _controller,
+                          textAlign: TextAlign.center,
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                              hintText: "min"),
+                        ),
+                      ),
+                      IconButton(icon: Icon(Icons.add_circle_outline, color: kSecondColor), iconSize: defaultSize * 2.5,
+                        onPressed: (){
+                          int minutes = int.parse(_controller.text);
+                          minutes++;
+                          _controller.text = minutes.toString();
+                        },
+                      ),
+                    ],
+                  )
+                ],
+              );
+            }),
+          );
+        });
+  }
+
   static showLanguageDialog(BuildContext context) async {
     List<DropdownMenuItem<String>> _languagesItems = getDropDownMenuItems(Language.flagNameList());
     Locale _locale = await getLocale();
@@ -73,7 +136,8 @@ class UtilsImpl {
               );
             }),
           );
-        });
+        },
+    );
   }
 
   static List<DropdownMenuItem<String>> getDropDownMenuItems(
