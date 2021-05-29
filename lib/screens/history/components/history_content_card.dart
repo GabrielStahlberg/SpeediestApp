@@ -6,9 +6,8 @@ import 'package:speediest_app/utils/contants.dart';
 class HistoryContentCard extends StatelessWidget {
 
   final ConnectionHistory history;
-  final List<ConnectionHistory> historyList;
 
-  const HistoryContentCard({this.history, this.historyList, Key key}) : super(key: key);
+  const HistoryContentCard({this.history, Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +47,7 @@ class HistoryContentCard extends StatelessWidget {
                     ),
                     SizedBox(height: defaultSize),
                     Text(
-                      history.duration,
+                      history.duration.toString(),
                       style: TextStyle(
                         fontSize: defaultSize * 2,
                         fontWeight: FontWeight.bold,
@@ -71,7 +70,7 @@ class HistoryContentCard extends StatelessWidget {
                   ),
                   SizedBox(height: defaultSize * 5),
                   Text(
-                    history.average,
+                    history.downloadAverage.toString(),
                     style: TextStyle(
                       fontSize: defaultSize,
                       fontWeight: FontWeight.bold,

@@ -2,7 +2,9 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:speediest_app/service/connection_service.dart';
 import 'package:speediest_app/size_config.dart';
 import 'package:speedometer/speedometer.dart';
 
@@ -108,6 +110,9 @@ class _MainScreenState extends State<MainScreen> {
             setState(() {
               averageUpload = _calculateAverage(testValues);
             });
+            await Future.delayed(Duration(seconds: 3));
+            ConnectionService service = ConnectionService();
+            Response response = await service.saveTest(averageDownload, averageUpload);
           },
           child: Icon(Icons.network_check),
           elevation: 2.0,

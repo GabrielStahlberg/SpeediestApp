@@ -7,9 +7,8 @@ import 'package:speediest_app/utils/contants.dart';
 class HistoryItemCard extends StatelessWidget {
 
   final ConnectionHistory history;
-  final List<ConnectionHistory> historyList;
 
-  const HistoryItemCard({this.history, this.historyList, Key key}) : super(key: key);
+  const HistoryItemCard({this.history, Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +30,7 @@ class HistoryItemCard extends StatelessWidget {
               elevation: 2.0,
               shadowColor: kPrimaryColor,
               clipBehavior: Clip.antiAlias,
-              child: HistoryContentCard(history: history, historyList: historyList),
+              child: HistoryContentCard(history: history),
             ),
           ),
         ],

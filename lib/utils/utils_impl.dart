@@ -1,10 +1,12 @@
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:speediest_app/localization/app_localization.dart';
 import 'package:speediest_app/main.dart';
 import 'package:speediest_app/model/connection_stats.dart';
 import 'package:speediest_app/model/language.dart';
+import 'package:speediest_app/service/connection_service.dart';
 import 'package:speediest_app/size_config.dart';
 import 'package:speediest_app/widgets/alert_dialog_popup.dart';
 import 'package:speediest_app/widgets/dropdown.dart';
@@ -37,8 +39,12 @@ class UtilsImpl {
             title: "Teste periódico",
             negativeButton: UtilsImpl.getTranslated(context, "cancel"),
             positiveButton: UtilsImpl.getTranslated(context, "confirm"),
-            onPress: () {
-              Navigator.pop(context);
+            onPress: () async {
+              ConnectionService service = ConnectionService();
+              Response response = await service.changePeriod(_controller.text);
+              if(response.statusCode == 204) {
+                Navigator.pop(context);
+              }
             },
             content: StatefulBuilder(builder: (context, setState) {
               double defaultSize = SizeConfig.defaultSize;
