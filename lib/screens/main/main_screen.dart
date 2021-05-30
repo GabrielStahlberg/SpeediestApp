@@ -109,6 +109,7 @@ class _MainScreenState extends State<MainScreen> {
               await Future.delayed(Duration(seconds: 6));
               setState(() {
                 averageDownload = _calculateAverage(testValues);
+                textValue = "Upload";
               });
               testValues = _executeTest();
               await Future.delayed(Duration(seconds: 5));

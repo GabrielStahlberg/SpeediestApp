@@ -12,7 +12,7 @@ class LineChartConnection extends StatelessWidget {
   Widget build(BuildContext context) {
     return charts.LineChart(
       seriesList,
-      animate: true,
+      animate: false,
       behaviors: [
         charts.SeriesLegend(
           position: charts.BehaviorPosition.end

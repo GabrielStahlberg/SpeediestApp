@@ -1,8 +1,10 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:speediest_app/model/connection_stats.dart';
 import 'package:speediest_app/screens/connection/components/line_chart_connection.dart';
+import 'package:speediest_app/screens/home/home_screen.dart';
 import 'package:speediest_app/service/connection_service.dart';
 import 'package:speediest_app/size_config.dart';
 import 'package:speediest_app/utils/contants.dart';
@@ -67,11 +69,9 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
                     padding: EdgeInsets.all(defaultSize * 0.8),
                     childAspectRatio: 2,
                     children: [
-                      DetailsItems(infoValue: "Tempo conectado", infoName: "02:32:11"),
-                      DetailsItems(infoValue: "Próximo teste em:", infoName: "43:21:54"),
+                      DetailsItems(infoValue: "Tempo conectado", infoName: HomeScreen.timeToDisplay),
                       DetailsItems(infoValue: "Média geral Download", infoName: snapshot.data["downloadGeneralAverage"].toString() + " Mbps"),
                       DetailsItems(infoValue: "Média geral Upload", infoName: snapshot.data["uploadGeneralAverage"].toString() + " Mbps"),
-                      DetailsItems(infoValue: "Ping", infoName: "10 ms"),
                       DetailsItems(infoValue: "Localização", infoName: "Araraquara-SP / Brasil"),
                     ],
                   )
