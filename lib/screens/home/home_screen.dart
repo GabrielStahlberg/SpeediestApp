@@ -7,6 +7,7 @@ import 'package:speediest_app/screens/home/components/bottom_navigator_bar.dart'
 import 'package:speediest_app/screens/home/components/settings_action.dart';
 import 'package:speediest_app/screens/main/main_screen.dart';
 import 'package:speediest_app/store/home_store.dart';
+import 'package:speediest_app/utils/contants.dart';
 import 'package:speediest_app/widgets/background.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -60,11 +61,12 @@ class _HomeScreenState extends State<HomeScreen> {
     return Observer(builder: (_) {
       return Scaffold(
         appBar: AppBar(
-          title: Text("Speediest"),
+          title: Text("Speediest", style: TextStyle(color: Colors.white),),
           centerTitle: true,
           actions: [
             SettingsAction()
           ],
+          backgroundColor: kSecondColor,
         ),
         body: Background(
           child: storeHome.screen,

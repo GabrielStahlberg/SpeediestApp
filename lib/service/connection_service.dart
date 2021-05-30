@@ -4,7 +4,7 @@ import 'package:http/http.dart';
 
 class ConnectionService {
 
-  final String baseUrl = "http://192.168.15.31:8080/connections";
+  final String baseUrl = "https://speediest-api.herokuapp.com/connections";
 
   Future<Response> findAllConnections() async {
     return await http.get(Uri.parse(baseUrl));

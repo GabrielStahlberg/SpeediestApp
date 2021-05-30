@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:speediest_app/model/connection_history.dart';
 import 'package:speediest_app/screens/history/components/history_content_card.dart';
 import 'package:speediest_app/size_config.dart';
-import 'package:speediest_app/utils/contants.dart';
 
 class HistoryItemCard extends StatelessWidget {
 
@@ -27,8 +26,8 @@ class HistoryItemCard extends StatelessWidget {
             child: Card(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),
-              elevation: 2.0,
-              shadowColor: kPrimaryColor,
+              elevation: 5.0,
+              shadowColor: Colors.black,
               clipBehavior: Clip.antiAlias,
               child: HistoryContentCard(history: history),
             ),

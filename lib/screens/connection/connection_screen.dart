@@ -57,7 +57,7 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
                   padding: EdgeInsets.all(defaultSize),
                   childAspectRatio: 2,
                   children: [
-                    ChartsItems(chartTitle: "Estatística de Médias", downloadData: getData(snapshot.data["downloadAverages"], Colors.green), uploadData: getData(snapshot.data["uploadAverages"], Colors.red),),
+                    ChartsItems(chartTitle: UtilsImpl.getTranslated(context, "average_stats"), downloadData: getData(snapshot.data["downloadAverages"], Colors.green), uploadData: getData(snapshot.data["uploadAverages"], Colors.red),),
                   ],
                 ),
               ),
@@ -69,10 +69,10 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
                     padding: EdgeInsets.all(defaultSize * 0.8),
                     childAspectRatio: 2,
                     children: [
-                      DetailsItems(infoValue: "Tempo conectado", infoName: HomeScreen.timeToDisplay),
-                      DetailsItems(infoValue: "Média geral Download", infoName: snapshot.data["downloadGeneralAverage"].toString() + " Mbps"),
-                      DetailsItems(infoValue: "Média geral Upload", infoName: snapshot.data["uploadGeneralAverage"].toString() + " Mbps"),
-                      DetailsItems(infoValue: "Localização", infoName: "Araraquara-SP / Brasil"),
+                      DetailsItems(infoValue: UtilsImpl.getTranslated(context, "connection_duration"), infoName: HomeScreen.timeToDisplay),
+                      DetailsItems(infoValue: UtilsImpl.getTranslated(context, "general_avg_download"), infoName: snapshot.data["downloadGeneralAverage"].toString() + " Mbps"),
+                      DetailsItems(infoValue: UtilsImpl.getTranslated(context, "general_avg_upload"), infoName: snapshot.data["uploadGeneralAverage"].toString() + " Mbps"),
+                      DetailsItems(infoValue: UtilsImpl.getTranslated(context, "location"), infoName: "Araraquara-SP / Brasil"),
                     ],
                   )
               )
@@ -115,16 +115,19 @@ class TwoLineItem extends StatelessWidget {
       children: <Widget>[
         Text(
           infoValue,
+          textAlign: TextAlign.center,
           style: TextStyle(
-            fontSize: defaultSize * 1.8,
+            fontSize: defaultSize * 1.5,
             color: kPrimaryColor,
             fontWeight: FontWeight.w600,
           ),
         ),
+        SizedBox(height: defaultSize),
         Text(
           infoName,
+          textAlign: TextAlign.center,
           style: TextStyle(
-            fontSize: defaultSize * 1.6,
+            fontSize: defaultSize * 1.4,
             color: kPrimaryColor,
             fontWeight: FontWeight.w200,
           ),
@@ -133,8 +136,6 @@ class TwoLineItem extends StatelessWidget {
     );
   }
 }
-
-/* ----------------------------------- */
 
 class ChartsItems extends StatelessWidget {
 

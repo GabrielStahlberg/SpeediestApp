@@ -40,7 +40,7 @@ class HistoryContentCard extends StatelessWidget {
                         Text(
                           history.name,
                           style: TextStyle(
-                              fontSize: defaultSize * 2.3, fontWeight: FontWeight.bold),
+                              fontSize: defaultSize * 2.3, fontWeight: FontWeight.bold, color: kSecondColor),
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -52,7 +52,7 @@ class HistoryContentCard extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: defaultSize * 1.3,
                                 fontWeight: FontWeight.bold,
-                                color: kSecondColor,
+                                color: Colors.black45,
                               ),
                             ),
                             Text(
@@ -60,7 +60,7 @@ class HistoryContentCard extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: defaultSize * 1.3,
                                 fontWeight: FontWeight.bold,
-                                color: kSecondColor,
+                                color: Colors.black45,
                               ),
                             ),
                           ],
@@ -75,9 +75,9 @@ class HistoryContentCard extends StatelessWidget {
                         Text(
                           history.location,
                           style: TextStyle(
-                              fontSize: defaultSize * 2,
+                              fontSize: defaultSize * 1.8,
                               fontWeight: FontWeight.bold,
-                              color: kSecondColor,
+                              color: kPrimaryColor,
                           ),
                         ),
                       ],
@@ -90,9 +90,9 @@ class HistoryContentCard extends StatelessWidget {
                         Text(
                           history.duration.toString() + " min",
                           style: TextStyle(
-                            fontSize: defaultSize * 2,
+                            fontSize: defaultSize * 1.8,
                             fontWeight: FontWeight.bold,
-                            color: kSecondColor,
+                            color: kPrimaryColor,
                           ),
                         ),
                       ],
@@ -110,7 +110,7 @@ class HistoryContentCard extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: defaultSize * 1.8,
                                 fontWeight: FontWeight.bold,
-                                color: kSecondColor,
+                                color: kSeaGreen,
                               ),
                             ),
                           ],
@@ -124,7 +124,7 @@ class HistoryContentCard extends StatelessWidget {
                               style: TextStyle(
                                 fontSize: defaultSize * 1.8,
                                 fontWeight: FontWeight.bold,
-                                color: kSecondColor,
+                                color: kFireBrick,
                               ),
                             ),
                           ],

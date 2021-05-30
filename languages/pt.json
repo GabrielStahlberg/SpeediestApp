@@ -1,12 +1,20 @@
 {
+  "average_stats" : "Estatística de Médias",
   "cancel" : "Cancelar",
   "confirm" : "Confirmar",
   "connection" : "Conexão",
+  "connection_duration" : "Duração da conexão",
+  "general_avg_download" : "Média geral de download",
+  "general_avg_upload" : "Média geral de upload",
   "history" : "Histórico",
   "idioms" : "Idiomas",
+  "if_reach_notification" : "Caso atinja abaixo de (Mbps):",
+  "inform_minutes" : "Informe em minutos:",
   "language" : "Linguagem",
+  "location" : "Localização",
   "notifications" : "Notificações",
   "periodic_test" : "Teste periódico",
   "select" : "Selecione",
+  "send_notification" : "Enviar notificação",
   "settings" : "Configurações"
 }

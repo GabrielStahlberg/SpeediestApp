@@ -6,6 +6,7 @@ import 'package:http/http.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:speediest_app/service/connection_service.dart';
 import 'package:speediest_app/size_config.dart';
+import 'package:speediest_app/utils/contants.dart';
 import 'package:speedometer/speedometer.dart';
 
 class MainScreen extends StatefulWidget {
@@ -57,7 +58,7 @@ class _MainScreenState extends State<MainScreen> {
     double defaultSize = SizeConfig.defaultSize;
 
     final ThemeData somTheme = ThemeData(
-        primaryColor: Colors.blue,
+        primaryColor: kSecondColor,
         accentColor: Colors.black,
         backgroundColor: Colors.grey);
 
@@ -85,9 +86,9 @@ class _MainScreenState extends State<MainScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(averageDownload.toStringAsFixed(1),
-                    style: TextStyle(fontSize: defaultSize * 2.5, fontWeight: FontWeight.bold),),
+                    style: TextStyle(fontSize: defaultSize * 2.5, fontWeight: FontWeight.bold, color: kSeaGreen),),
                   Text("Download",
-                    style: TextStyle(fontSize: defaultSize * 1.6),),
+                    style: TextStyle(fontSize: defaultSize * 1.6, color: kSeaGreen),),
                 ],
               ),
               Container(height: defaultSize * 5, child: VerticalDivider(width: defaultSize * 5, color: Colors.black)),
@@ -95,9 +96,9 @@ class _MainScreenState extends State<MainScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(averageUpload.toStringAsFixed(1),
-                    style: TextStyle(fontSize: defaultSize * 2.5, fontWeight: FontWeight.bold),),
+                    style: TextStyle(fontSize: defaultSize * 2.5, fontWeight: FontWeight.bold, color: kFireBrick),),
                   Text("Upload",
-                    style: TextStyle(fontSize: defaultSize * 1.6),),
+                    style: TextStyle(fontSize: defaultSize * 1.6, color: kFireBrick),),
                 ],
               )
             ],
@@ -120,7 +121,8 @@ class _MainScreenState extends State<MainScreen> {
               ConnectionService service = ConnectionService();
               Response response = await service.saveTest(averageDownload, averageUpload);
             },
-            child: Icon(Icons.network_check),
+            child: Icon(Icons.network_check, color: Colors.white,),
+            backgroundColor: kSecondColor,
             elevation: 2.0,
           )
         ],

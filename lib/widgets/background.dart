@@ -10,12 +10,7 @@ class Background extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-            colors: [kBackgroundFirst, kBackgroundSecond, kBackgroundFirst],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            tileMode: TileMode.repeated
-        ),
+        color: kBackgroundSecond
       ),
       child: child,
     );

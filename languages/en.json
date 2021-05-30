@@ -1,12 +1,20 @@
 {
+  "average_stats" : "Average Statistic",
   "cancel" : "Cancel",
   "confirm" : "Confirm",
   "connection" : "Connection",
+  "connection_duration" : "Connection duration",
+  "general_avg_download" : "General download average",
+  "general_avg_upload" : "General upload average",
   "history" : "History",
   "idioms" : "Idioms",
+  "if_reach_notification" : "If reach lower than (Mbps):",
+  "inform_minutes" : "Inform in minutes:",
   "language" : "Language",
+  "location" : "Location",
   "notifications" : "Notifications",
   "periodic_test" : "Periodic test",
   "select" : "Select",
+  "send_notification" : "Send notification",
   "settings" : "Settings"
 }

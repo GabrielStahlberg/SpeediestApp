@@ -56,7 +56,7 @@ class UtilsImpl {
         context: context,
         builder: (context) {
           return AlertDialogPopup(
-            title: "Enviar notificação",
+            title: getTranslated(context, "send_notification"),
             negativeButton: UtilsImpl.getTranslated(context, "cancel"),
             positiveButton: UtilsImpl.getTranslated(context, "confirm"),
             onPress: () async {
@@ -73,7 +73,7 @@ class UtilsImpl {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    "Caso atinja abaixo de(Mbps):",
+                    getTranslated(context, "if_reach_notification"),
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: defaultSize * 1.7),
@@ -158,9 +158,9 @@ class UtilsImpl {
         context: context,
         builder: (context) {
           return AlertDialogPopup(
-            title: "Teste periódico",
-            negativeButton: UtilsImpl.getTranslated(context, "cancel"),
-            positiveButton: UtilsImpl.getTranslated(context, "confirm"),
+            title: getTranslated(context, "periodic_test"),
+            negativeButton: getTranslated(context, "cancel"),
+            positiveButton: getTranslated(context, "confirm"),
             onPress: () async {
               ConnectionService service = ConnectionService();
               Response response = await service.changePeriod(_controller.text);
@@ -175,7 +175,7 @@ class UtilsImpl {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    "Informe em minutos:",
+                    getTranslated(context, "inform_minutes"),
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: defaultSize * 1.7),
