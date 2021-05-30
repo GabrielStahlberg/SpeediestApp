@@ -14,7 +14,9 @@ class LineChartConnection extends StatelessWidget {
       seriesList,
       animate: true,
       behaviors: [
-        charts.ChartTitle(title)
+        charts.SeriesLegend(
+          position: charts.BehaviorPosition.end
+        )
       ],
       defaultRenderer: charts.LineRendererConfig(
           includePoints: true

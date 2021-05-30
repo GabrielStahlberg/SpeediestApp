@@ -1,6 +1,7 @@
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:speediest_app/localization/app_localization.dart';
 import 'package:speediest_app/main.dart';
@@ -15,15 +16,32 @@ import 'contants.dart';
 
 class UtilsImpl {
 
-  static getLineChartConnectionsSeries(var data) {
+  static dateFormatter(String date) {
+    String dateSplitted = date.split(".")[0];
+    String replaced1 = dateSplitted.replaceAll(RegExp(r"-"), "");
+    String replaced2 = replaced1.replaceAll(RegExp(r":"), "");
+    DateTime dateTime = DateTime.parse(replaced2);
+    String formatted = DateFormat("dd/MM/yyyy hh:mm").format(dateTime);
+    return formatted;
+  }
+
+  static getLineChartConnectionsSeries(var downloadData, var uploadData) {
     return [
       charts.Series<ConnectionStats, int>(
-          id: "Connections",
+          id: "Download",
           domainFn: (ConnectionStats stats, _) => stats.id,
           measureFn: (ConnectionStats stats, _) => stats.average,
           colorFn: (ConnectionStats stats, _) =>
               charts.ColorUtil.fromDartColor(stats.color),
-          data: data
+          data: downloadData
+      ),
+      charts.Series<ConnectionStats, int>(
+          id: "Upload",
+          domainFn: (ConnectionStats stats, _) => stats.id,
+          measureFn: (ConnectionStats stats, _) => stats.average,
+          colorFn: (ConnectionStats stats, _) =>
+              charts.ColorUtil.fromDartColor(stats.color),
+          data: uploadData
       )
     ];
   }

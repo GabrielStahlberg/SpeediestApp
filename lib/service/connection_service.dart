@@ -10,6 +10,10 @@ class ConnectionService {
     return await http.get(Uri.parse(baseUrl));
   }
 
+  Future<Response> findCurrentConnectionStats() async {
+    return await http.get(Uri.parse(baseUrl + "/currentConnection"));
+  }
+
   Future<Response> changePeriod(String minutes) async {
     return await http.post(
       Uri.parse(baseUrl + "/changePeriodTime"),

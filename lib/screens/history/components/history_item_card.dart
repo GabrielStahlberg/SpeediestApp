@@ -23,7 +23,7 @@ class HistoryItemCard extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(
-            height: defaultSize * 15,
+            height: defaultSize * 20,
             child: Card(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(15.0))),

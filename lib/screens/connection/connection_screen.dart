@@ -1,9 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:speediest_app/model/connection_stats.dart';
 import 'package:speediest_app/screens/connection/components/line_chart_connection.dart';
+import 'package:speediest_app/service/connection_service.dart';
 import 'package:speediest_app/size_config.dart';
 import 'package:speediest_app/utils/contants.dart';
 import 'package:speediest_app/utils/utils_impl.dart';
+import 'package:http/http.dart' as http;
 
 class ConnectionScreen extends StatefulWidget {
   @override
@@ -12,13 +16,21 @@ class ConnectionScreen extends StatefulWidget {
 
 class _ConnectionScreenState extends State<ConnectionScreen> {
 
-  static getConnectionsData() {
-    return [
-      ConnectionStats(1, 80, Colors.blue),
-      ConnectionStats(2, 66, Colors.blue),
-      ConnectionStats(3, 23, Colors.blue),
-      ConnectionStats(4, 5, Colors.blue),
-    ];
+  Future<dynamic> fetchCurrentConnection() async {
+    ConnectionService service = ConnectionService();
+    http.Response response = await service.findCurrentConnectionStats();
+    if (response.statusCode == 200) {
+      return json.decode(response.body);
+    }
+    throw Exception('Failed to load connections');
+  }
+
+  static getData(List<dynamic> json, Color color) {
+    List<ConnectionStats> data = [];
+    for (var i = 0; i < json.length; i++) {
+      data.add(ConnectionStats((i+1), json[i], color));
+    }
+    return data;
   }
 
   @override
@@ -26,37 +38,48 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
     SizeConfig().init(context);
     double defaultSize = SizeConfig.defaultSize;
 
-    return Column(
-      children: [
-        SizedBox(
-          height: defaultSize * 22,
-          child: GridView.count(
-            crossAxisCount: 1,
-            mainAxisSpacing: 6,
-            crossAxisSpacing: 6,
-            padding: EdgeInsets.all(defaultSize),
-            childAspectRatio: 2,
+    return FutureBuilder<dynamic>(
+      future: fetchCurrentConnection(),
+      builder: (context, snapshot){
+        if(!snapshot.hasData) {
+          return Center(child: CircularProgressIndicator());
+        } else {
+          return Column(
             children: [
-              ChartsItems(chartTitle: "Estatística de Médias", data: getConnectionsData()),
+              SizedBox(
+                height: defaultSize * 22,
+                child: GridView.count(
+                  crossAxisCount: 1,
+                  mainAxisSpacing: 6,
+                  crossAxisSpacing: 6,
+                  padding: EdgeInsets.all(defaultSize),
+                  childAspectRatio: 2,
+                  children: [
+                    ChartsItems(chartTitle: "Estatística de Médias", downloadData: getData(snapshot.data["downloadAverages"], Colors.green), uploadData: getData(snapshot.data["uploadAverages"], Colors.red),),
+                  ],
+                ),
+              ),
+              Expanded(
+                  child: GridView.count(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 6,
+                    crossAxisSpacing: 6,
+                    padding: EdgeInsets.all(defaultSize * 0.8),
+                    childAspectRatio: 2,
+                    children: [
+                      DetailsItems(infoValue: "Tempo conectado", infoName: "02:32:11"),
+                      DetailsItems(infoValue: "Próximo teste em:", infoName: "43:21:54"),
+                      DetailsItems(infoValue: "Média geral Download", infoName: snapshot.data["downloadGeneralAverage"].toString() + " Mbps"),
+                      DetailsItems(infoValue: "Média geral Upload", infoName: snapshot.data["uploadGeneralAverage"].toString() + " Mbps"),
+                      DetailsItems(infoValue: "Ping", infoName: "10 ms"),
+                      DetailsItems(infoValue: "Localização", infoName: "Araraquara-SP / Brasil"),
+                    ],
+                  )
+              )
             ],
-          ),
-        ),
-        Expanded(
-          child: GridView.count(
-            crossAxisCount: 2,
-            mainAxisSpacing: 6,
-            crossAxisSpacing: 6,
-            padding: EdgeInsets.all(defaultSize * 0.8),
-            childAspectRatio: 2,
-            children: [
-              DetailsItems(infoValue: "Tempo conectado", infoName: "02:32:11"),
-              DetailsItems(infoValue: "Próximo teste em:", infoName: "43:21:54"),
-              DetailsItems(infoValue: "Média nesse período", infoName: "78.7 Mbps"),
-              DetailsItems(infoValue: "Localização", infoName: "Araraquara-SP / Brasil"),
-            ],
-          )
-        )
-      ],
+          );
+        }
+      },
     );
   }
 }
@@ -116,9 +139,10 @@ class TwoLineItem extends StatelessWidget {
 class ChartsItems extends StatelessWidget {
 
   final String chartTitle;
-  final data;
+  final downloadData;
+  final uploadData;
 
-  const ChartsItems({Key key, @required this.chartTitle, @required this.data}) : super(key: key);
+  const ChartsItems({Key key, @required this.chartTitle, @required this.downloadData, @required this.uploadData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -131,7 +155,7 @@ class ChartsItems extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.all(defaultSize * 0.5),
         child: SizedBox(
-            child: LineChartConnection(seriesList: UtilsImpl.getLineChartConnectionsSeries(data), title: chartTitle)
+            child: LineChartConnection(seriesList: UtilsImpl.getLineChartConnectionsSeries(downloadData, uploadData), title: chartTitle)
         ),
       ),
     );
