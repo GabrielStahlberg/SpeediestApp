@@ -11,6 +11,7 @@ class Body extends StatelessWidget {
     final items = [
       SettingsItems(Icon(Icons.language), "language", (){UtilsImpl.showLanguageDialog(context);}),
       SettingsItems(Icon(Icons.alarm), "periodic_test", (){UtilsImpl.showPeriodicTestDialog(context);}),
+      SettingsItems(Icon(Icons.notifications), "notifications", (){UtilsImpl.showNotificationDialog(context);}),
     ];
 
     return Padding(

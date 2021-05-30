@@ -46,6 +46,110 @@ class UtilsImpl {
     ];
   }
 
+  static showNotificationDialog(BuildContext context) {
+    final TextEditingController _downloadController = TextEditingController();
+    final TextEditingController _uploadController = TextEditingController();
+    _downloadController.text = "4";
+    _uploadController.text = "2";
+
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialogPopup(
+            title: "Enviar notificação",
+            negativeButton: UtilsImpl.getTranslated(context, "cancel"),
+            positiveButton: UtilsImpl.getTranslated(context, "confirm"),
+            onPress: () async {
+              ConnectionService service = ConnectionService();
+              Response response = await service.changeMinAcceptable(_downloadController.text, _uploadController.text);
+              if(response.statusCode == 204) {
+                Navigator.pop(context);
+              }
+            },
+            content: StatefulBuilder(builder: (context, setState) {
+              double defaultSize = SizeConfig.defaultSize;
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    "Caso atinja abaixo de(Mbps):",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: defaultSize * 1.7),
+                  ),
+                  SizedBox(height: defaultSize),
+                  Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Icon(Icons.download),
+                          IconButton(icon: Icon(Icons.remove_circle_outline, color: kSecondColor), iconSize: defaultSize * 2.5,
+                            onPressed: (){
+                              int mbps = int.parse(_downloadController.text);
+                              mbps--;
+                              _downloadController.text = mbps.toString();
+                            },
+                          ),
+                          SizedBox(
+                            width: defaultSize * 5,
+                            child: TextField(
+                              controller: _downloadController,
+                              textAlign: TextAlign.center,
+                              keyboardType: TextInputType.number,
+                              decoration: InputDecoration(
+                                  hintText: "Download"),
+                            ),
+                          ),
+                          IconButton(icon: Icon(Icons.add_circle_outline, color: kSecondColor), iconSize: defaultSize * 2.5,
+                            onPressed: (){
+                              int mbps = int.parse(_downloadController.text);
+                              mbps++;
+                              _downloadController.text = mbps.toString();
+                            },
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Icon(Icons.upload),
+                          IconButton(icon: Icon(Icons.remove_circle_outline, color: kSecondColor), iconSize: defaultSize * 2.5,
+                            onPressed: (){
+                              int mbps = int.parse(_uploadController.text);
+                              mbps--;
+                              _uploadController.text = mbps.toString();
+                            },
+                          ),
+                          SizedBox(
+                            width: defaultSize * 5,
+                            child: TextField(
+                              controller: _uploadController,
+                              textAlign: TextAlign.center,
+                              keyboardType: TextInputType.number,
+                              decoration: InputDecoration(
+                                  hintText: "Upload"),
+                            ),
+                          ),
+                          IconButton(icon: Icon(Icons.add_circle_outline, color: kSecondColor), iconSize: defaultSize * 2.5,
+                            onPressed: (){
+                              int mbps = int.parse(_uploadController.text);
+                              mbps++;
+                              _uploadController.text = mbps.toString();
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
+                  )
+                ],
+              );
+            }),
+          );
+        });
+  }
+
   static showPeriodicTestDialog(BuildContext context) {
     final TextEditingController _controller = TextEditingController();
     _controller.text = "30";

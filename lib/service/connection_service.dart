@@ -21,7 +21,20 @@ class ConnectionService {
         "Content-Type": "application/json; charset=UTF-8",
       },
       body: jsonEncode(<String, String>{
-        "period": minutes,
+        "value": minutes,
+      }),
+    );
+  }
+
+  Future<Response> changeMinAcceptable(String downloadMin, String uploadMin) async {
+    return await http.post(
+      Uri.parse(baseUrl + "/minAcceptable"),
+      headers: <String, String>{
+        "Content-Type": "application/json; charset=UTF-8",
+      },
+      body: jsonEncode(<String, String>{
+        "downloadValue": downloadMin,
+        "uploadValue": uploadMin,
       }),
     );
   }

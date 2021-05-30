@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "334392386342",
+    "project_id": "speediest-app",
+    "storage_bucket": "speediest-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:334392386342:android:112cc1bd9585091da317e7",
+        "android_client_info": {
+          "package_name": "com.speediest_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "334392386342-u5m0noasbvb80tn3q26g69pa88cev14v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXYO8opPNgFWhlJ4BGN3B22fVFkSVL6pU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "334392386342-u5m0noasbvb80tn3q26g69pa88cev14v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
