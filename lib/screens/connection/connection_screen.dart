@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:speediest_app/model/connection_stats.dart';
@@ -18,6 +19,8 @@ class ConnectionScreen extends StatefulWidget {
 
 class _ConnectionScreenState extends State<ConnectionScreen> {
 
+  int pingValue = 5;
+
   Future<dynamic> fetchCurrentConnection() async {
     ConnectionService service = ConnectionService();
     http.Response response = await service.findCurrentConnectionStats();
@@ -35,6 +38,25 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
     return data;
   }
 
+  _startTimer() {
+    var random = new Random();
+    Timer.periodic(Duration(
+        seconds: 1
+    ), (Timer t) {
+      if(mounted) {
+        setState(() {
+          pingValue = random.nextInt(20) + 3;
+        });
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _startTimer();
+  }
+
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
@@ -48,6 +70,13 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
         } else {
           return Column(
             children: [
+              SizedBox(height: defaultSize * 1.5,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Ping: " + pingValue.toString() + " ms", style: TextStyle(fontSize: defaultSize * 3),),
+                ],
+              ),
               SizedBox(
                 height: defaultSize * 22,
                 child: GridView.count(
@@ -57,7 +86,7 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
                   padding: EdgeInsets.all(defaultSize),
                   childAspectRatio: 2,
                   children: [
-                    ChartsItems(chartTitle: UtilsImpl.getTranslated(context, "average_stats"), downloadData: getData(snapshot.data["downloadAverages"], Colors.green), uploadData: getData(snapshot.data["uploadAverages"], Colors.red),),
+                    ChartsItems(chartTitle: UtilsImpl.getTranslated(context, "average_stats"), downloadData: getData(snapshot.data["downloadAverages"], kSeaGreen), uploadData: getData(snapshot.data["uploadAverages"], kFireBrick),),
                   ],
                 ),
               ),

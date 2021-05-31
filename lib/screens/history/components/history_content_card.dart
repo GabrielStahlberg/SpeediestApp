@@ -82,21 +82,6 @@ class HistoryContentCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(height: defaultSize),
-                    Row(
-                      children: [
-                        Icon(MdiIcons.update),
-                        SizedBox(width: defaultSize,),
-                        Text(
-                          history.duration.toString() + " min",
-                          style: TextStyle(
-                            fontSize: defaultSize * 1.8,
-                            fontWeight: FontWeight.bold,
-                            color: kPrimaryColor,
-                          ),
-                        ),
-                      ],
-                    ),
                     SizedBox(height: defaultSize,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,

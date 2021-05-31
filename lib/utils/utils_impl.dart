@@ -84,7 +84,7 @@ class UtilsImpl {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          Icon(Icons.download),
+                          Icon(Icons.download, color: kSeaGreen),
                           IconButton(icon: Icon(Icons.remove_circle_outline, color: kSecondColor), iconSize: defaultSize * 2.5,
                             onPressed: (){
                               int mbps = int.parse(_downloadController.text);
@@ -114,7 +114,7 @@ class UtilsImpl {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          Icon(Icons.upload),
+                          Icon(Icons.upload, color: kFireBrick),
                           IconButton(icon: Icon(Icons.remove_circle_outline, color: kSecondColor), iconSize: defaultSize * 2.5,
                             onPressed: (){
                               int mbps = int.parse(_uploadController.text);

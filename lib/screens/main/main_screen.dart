@@ -19,6 +19,7 @@ class _MainScreenState extends State<MainScreen> {
   double _upperValue = 260.0;
   int start = 0;
   int end = 400;
+  int max = 250;
   PublishSubject<double> eventObservable = PublishSubject();
 
   List<double> testValues = [];
@@ -26,12 +27,17 @@ class _MainScreenState extends State<MainScreen> {
   double averageUpload = 0.0;
   String textValue = "Download";
 
-  List<double> _executeTest() {
+  List<double> _executeTest(bool isUpdate) {
     List<double> list = [];
     var random = new Random();
     setState(() {
       Timer.periodic(Duration(milliseconds: 700), (timer) {
-        double value = random.nextInt(end - 1) + random.nextDouble();
+        double value = 0;
+        if(isUpdate) {
+          value = random.nextInt(125 - 1) + random.nextDouble();
+        } else {
+          value = random.nextInt(max - 1) + random.nextDouble();
+        }
         if(list.length == 4) {
           setState(() {
             textValue = "Download";
@@ -106,13 +112,13 @@ class _MainScreenState extends State<MainScreen> {
           SizedBox(height: defaultSize * 5),
           FloatingActionButton(
             onPressed: () async {
-              testValues = _executeTest();
+              testValues = _executeTest(false);
               await Future.delayed(Duration(seconds: 6));
               setState(() {
                 averageDownload = _calculateAverage(testValues);
                 textValue = "Upload";
               });
-              testValues = _executeTest();
+              testValues = _executeTest(true);
               await Future.delayed(Duration(seconds: 5));
               setState(() {
                 averageUpload = _calculateAverage(testValues);

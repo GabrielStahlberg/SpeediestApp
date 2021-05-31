@@ -46,7 +46,7 @@ class ConnectionService {
         "Content-Type": "application/json; charset=UTF-8",
       },
       body: jsonEncode(<String, dynamic>{
-        "name": "Connection_Gabriel_Test",
+        "name": "My_Connection",
         "location": "Araraquara-SP",
         "durationMinutes": "40",
         "downloadAverage": averageDownload,
